@@ -16,7 +16,7 @@ Up until putting together the Deep Instantiator, I coded this manually with a ve
 
 Deep Instatiator will use reflection to traverse through the class you want to instantiate and instantiate all POJOs inside of it recursively. Maps, Lists, and Sets are supported as well, these will be instantiated as HashMaps, ArrayLists, and HashSets. 
 
-Maps offer a bit of trickiness in reflection as you can come across a map that has a generic/wrapper key (which we leave as null), but a POJO value (which we want to instantiate and recursively burrow down). In this instance, default keys are made with support for String (""), Integer (0), Long (0L), Float (0F), and Double (0D) keys. This is done in order to be able to create the POJO value in the Map which can be then be traversed without throwing up marshalling issues because of null keys.
+Maps offer a bit of trickiness in reflection as you can come across a map that has a generic/wrapper key (which we leave as null), but a POJO value (which we want to instantiate and recursively burrow down). In this instance, default keys are made with support for String (`""`), Integer (`0`), Long (`0L`), Float (`0F`), and Double (`0D`) keys. This is done in order to be able to create the POJO value in the Map which can be then be traversed without throwing up marshalling issues because of null keys.
 
 A few classes are specifically ignored because they do not play nicely with reflection trying to call their default constructor. They can be customised using the constuctor. By default these ignore classes are:
  - String.class
@@ -26,11 +26,11 @@ A few classes are specifically ignored because they do not play nicely with refl
 
 # Usage
 
-It's pretty straightforward to use. All you need to do is create (or instantiate _hurr hurr_) an instance of the DeepInstantiator, and then call instantiate() passing in the class you would like to traverse and instantiate. That's all!
+It's pretty straightforward to use. All you need to do is create (or instantiate _hurr hurr_) an instance of the `DeepInstantiator`, and then call `instantiate()` passing in the class you would like to traverse and instantiate. That's all!
 
 # Example
 
-Let's take the following POJOs as an example...
+Let's take the following POJOs as a simple example - imagine if we had 100 classes instead... :( 
 
 ```java
 class MyObject {
@@ -53,7 +53,7 @@ class MyObjectInsideAMap {
 }
 ```
 
-We can instantiate the top level POJO and it will create empty POJOs and null generics/wrappers for all fields recursively...
+We can instantiate the top level POJO using the Deep Instantiator and it will create empty POJOs and null generics/wrappers for all fields recursively.
 
 ```java
 DeepInstantiator dI = new DeepInstantiator();
